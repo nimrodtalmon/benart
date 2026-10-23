@@ -1,11 +1,5 @@
 [
-  {
-    "file": "birds-on-branch.jpg"
-  },
-  {
-    "file": "grey-branch.jpg"
-  },
-  {
-    "file": "pink-waves.jpg"
-  }
+  { "file": "earth-bird.jpg", "title": "Earth bird" },
+  { "file": "metal-bird.jpg", "title": "Metal bird" },
+  { "file": "water-bird.jpg", "title": "Water bird" }
 ]
