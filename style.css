@@ -48,9 +48,15 @@ main { max-width: 1100px; margin: 0 auto; padding: 48px 16px 96px; }
   align-items: start;
 }
 .piece { margin: 0; cursor: zoom-in; outline: none; }
+.piece .frame {
+  aspect-ratio: 4 / 5;
+  background: #f6f6f4;
+  padding: 28px;
+  display: flex; align-items: center; justify-content: center;
+}
 .piece img {
-  display: block; width: 100%; height: auto;
-  border: 1px solid var(--line);
+  display: block; max-width: 100%; max-height: 100%; width: auto; height: auto;
+  box-shadow: 0 1px 4px rgba(0,0,0,.12);
   transition: opacity .2s ease;
 }
 .piece:hover img, .piece:focus-visible img { opacity: .85; }

@@ -32,7 +32,10 @@
       img.src = "art/" + it.file;
       img.alt = it.title || "Artwork by Ben";
       img.loading = "lazy";
-      fig.appendChild(img);
+      const frame = document.createElement("div");
+      frame.className = "frame";
+      frame.appendChild(img);
+      fig.appendChild(frame);
       if (it.title || it.year || it.medium) {
         const cap = document.createElement("figcaption");
         cap.innerHTML = `<span class="title"></span><span class="meta"></span>`;
