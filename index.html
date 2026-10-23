@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ben's Art</title>
+  <meta name="description" content="Drawings and artwork by Ben.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><text x='50' y='72' font-size='64' text-anchor='middle' fill='%23e11d2e' font-family='Arial Black,sans-serif'>B</text></svg>">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="kicker">sketchbook · ink · color</p>
+      <h1>BEN'S <span>ART</span></h1>
+      <p class="tagline">Drawings, characters, and whatever comes out of the pen.</p>
+    </div>
+    <div class="halftone" aria-hidden="true"></div>
+  </header>
+
+  <nav class="filters" id="filters" aria-label="Filter artwork"></nav>
+
+  <main>
+    <section id="gallery" class="gallery" aria-live="polite"></section>
+    <p id="empty" class="empty" hidden>New art coming soon.</p>
+  </main>
+
+  <section class="about" id="about">
+    <h2>About</h2>
+    <p>Hi, I'm Ben. I draw characters, monsters, and scenes, mostly in a manga style. This is where I put my favorites.</p>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> Ben · All artwork belongs to the artist.</p>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Artwork viewer">
+    <button class="lb-close" aria-label="Close">×</button>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <figure>
+      <img id="lb-img" alt="">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-next" aria-label="Next">›</button>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
