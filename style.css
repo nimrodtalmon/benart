@@ -61,7 +61,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 48px 16px 96px; }
   transition: transform .25s ease, box-shadow .25s ease;
 }
 .piece .title {
-  background: linear-gradient(#d9485f, #d9485f) left bottom / 0 1px no-repeat;
+  background: linear-gradient(#9a9a96, #9a9a96) left bottom / 0 1px no-repeat;
   transition: background-size .3s ease;
 }
 .piece:hover .frame, .piece:focus-visible .frame { background: #efeeea; }
