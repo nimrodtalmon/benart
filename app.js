@@ -71,8 +71,50 @@
     lbImg.src = "art/" + it.file;
     lbImg.alt = it.title || "Artwork by Ben";
     lbCap.textContent = caption(it);
+    resetZoom();
   }
   function open(i) { show(i); lb.showModal(); }
+
+  // ---- Zoom (mouse wheel) + drag to pan ----
+  let scale = 1, tx = 0, ty = 0, drag = null;
+  const MAX = 6;
+  function applyZoom() {
+    lbImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    lbImg.classList.toggle("zoomed", scale > 1);
+  }
+  function resetZoom() { scale = 1; tx = 0; ty = 0; applyZoom(); }
+  function zoomAt(newScale, mx, my) {
+    newScale = Math.min(MAX, Math.max(1, newScale));
+    if (newScale === 1) return resetZoom();
+    const r = lbImg.getBoundingClientRect();      // current (transformed) box
+    const lx = (mx - r.left) / scale, ly = (my - r.top) / scale;
+    tx += lx * (scale - newScale);
+    ty += ly * (scale - newScale);
+    scale = newScale;
+    applyZoom();
+  }
+  lb.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    zoomAt(scale * Math.exp(-e.deltaY * 0.0015), e.clientX, e.clientY);
+  }, { passive: false });
+  lbImg.addEventListener("dblclick", (e) => {
+    scale > 1 ? resetZoom() : zoomAt(2.5, e.clientX, e.clientY);
+  });
+  lbImg.addEventListener("pointerdown", (e) => {
+    if (scale === 1) return;
+    e.preventDefault();
+    drag = { x: e.clientX - tx, y: e.clientY - ty };
+    lbImg.setPointerCapture(e.pointerId);
+    lbImg.classList.add("dragging");
+  });
+  lbImg.addEventListener("pointermove", (e) => {
+    if (!drag) return;
+    tx = e.clientX - drag.x; ty = e.clientY - drag.y; applyZoom();
+  });
+  const endDrag = () => { drag = null; lbImg.classList.remove("dragging"); };
+  lbImg.addEventListener("pointerup", endDrag);
+  lbImg.addEventListener("pointercancel", endDrag);
+  lb.addEventListener("close", resetZoom);
 
   lb.querySelector(".lb-close").addEventListener("click", () => lb.close());
   lb.querySelector(".lb-prev").addEventListener("click", () => show(current - 1));
@@ -86,7 +128,7 @@
   let x0 = null;
   lb.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
   lb.addEventListener("touchend", (e) => {
-    if (x0 === null) return;
+    if (x0 === null || scale > 1) { x0 = null; return; }
     const dx = e.changedTouches[0].clientX - x0;
     if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
     x0 = null;

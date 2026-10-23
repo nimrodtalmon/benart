@@ -90,13 +90,20 @@ footer p { margin: 0; }
   width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh;
   background: rgba(255,255,255,.97); color: var(--ink);
 }
-.lightbox[open] { display: flex; align-items: center; justify-content: center; }
+.lightbox[open] { display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .lightbox::backdrop { background: transparent; }
 .lightbox figure { margin: 0; max-width: 86vw; text-align: center; }
 .lightbox img {
   max-width: 86vw; max-height: 82vh; object-fit: contain;
   border: 1px solid var(--line);
+  transform-origin: 0 0;
+  cursor: zoom-in;
+  user-select: none; -webkit-user-drag: none;
+  touch-action: pinch-zoom;
 }
+.lightbox img.zoomed { cursor: grab; position: relative; z-index: 1; }
+.lightbox img.dragging { cursor: grabbing; }
+.lightbox button { z-index: 2; }
 .lightbox figcaption { margin-top: 14px; font-size: 1rem; letter-spacing: .02em; }
 .lightbox button {
   position: absolute; background: none; border: 0; color: var(--muted);
